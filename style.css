@@ -1,0 +1,289 @@
+body{
+	font-family: 'Open Sans', sans-serif;
+	background: #EEEDED;
+}
+
+.navbar-brand *{
+	color: white;
+}
+
+.jumbotron {
+	height: 200px;
+	overflow: hidden;
+	position: relative;
+}
+
+.jumbotron #details{
+	position: absolute;
+	color: white;
+}
+
+.jumbotron #details span{
+	color:#24A7CF;
+
+}
+
+.jumbotron {
+	background: url("http://colorfully.eu/wp-content/uploads/2012/09/moon-Lawn-comonaut-facebook-cover.jpg");
+	margin-top: -23px;
+	background-repeat: none;
+}
+
+footer{
+	height: auto;
+	padding: 10px 3px; 
+	background-color: black;
+	color:white;
+	font-weight: bold;
+	letter-spacing: .8px;
+}
+
+section .widgets{
+	margin: 20px 0px;
+}
+
+.popular ,.categories {
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	border: 1px solid #EEEDED;
+}
+
+.popular img{
+	width: 100%;
+	margin-top: 12px;
+}
+
+.popular .details{
+	margin-top: -6px;
+	margin-left: -10px;
+}
+
+.popular .details p{
+	font-style: Arial;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.popular ul li{
+	list-style: none;
+}
+
+.post{
+	background: white;
+	border: 1px solid #E3E3E3;
+	margin: 15px 0px;
+}
+
+.post .post-date{
+	 padding: 20px;
+	 text-align: center;
+}
+
+.post .post-date .day{
+	font-size: 30px;
+	color:#24A7CF;
+}
+
+.post .post-date .year{
+	font-weight: 100;
+}
+
+.post .post-title{
+	padding: 10px 15px 20px 20px;
+	border-left: 1px solid #EEEDED;
+}
+
+.post .post-title span{
+	color: #24A7CF;
+	font-weight: 100;
+	margin-left: 10px;
+}
+
+.post .profile-picture{
+	padding: 20px;
+}
+
+.post .profile-picture img{
+	width: 90%;
+}
+
+.post > a > img{
+	width: 100%;
+	height:350px;
+}
+
+.post .desc{
+	font-family: arial;
+	font-weight: 200;
+	font-size: 16px;
+	padding: 15px;
+	line-height: 20px;
+}
+
+.post > a.btn{
+	margin-left: 15px;
+	margin-bottom: 10px;
+}
+
+.post .bottom{
+	padding: 10px 20px;
+	border-top: 1px solid #E3E3E3;
+	color: #C6C6C6;
+}
+
+.post .bottom .first{
+	margin-right: 20px;
+}
+
+.post .bottom .sec{
+	margin-left: 20px;
+}
+
+nav #pagination{
+	text-align: center;
+}
+
+.pagination{
+	color:#24A7CF;
+	padding: 15px 25px;
+	font-size: 18px;
+}
+
+
+.contact-form{
+	background: white;
+	padding: 20px 20px;
+	/*margin: 10px;*/
+}
+
+.contact-form textarea{
+	resize: none;
+}
+
+.contact-form h2{
+	color:#24A7CF;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.related-post a > img{
+	width: 100%;
+}
+
+.related-post{
+	background: white;
+	padding:10px;
+	margin-bottom: 20px;
+
+}
+
+.related-post h2{
+	color: #24A7CF;
+	font-weight: bold;
+}
+
+.author, .comment{
+	background: white;
+	padding: 20px;
+	margin-bottom: 15px;
+}
+
+.author img, .comment img{
+	width: 100%;
+}
+
+.author h2,.comment h2 ,.comment h3{
+	color: #24A7CF;
+}
+
+.author-desc{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
+}
+
+.single-comment{
+	margin-bottom: 10px;
+}
+
+.comment .single-comment .col-md-10{
+	margin-top: -15px;
+	padding-bottom: 10px;
+}
+
+
+/*Media Query*/
+
+@media (max-width:992px){
+	.post .post-title{
+		border:none;
+		text-align: center;
+		margin-top: -25px;
+	}
+
+	.post .profile-picture{
+		text-align: center;
+		margin-top: -40px;
+	}
+
+	.post .profile-picture img{
+		width: 20%;
+	}
+
+.author img, .comment img{
+	width: 20%;
+}
+
+.author,.comment{
+	text-align: center;
+}
+
+
+}
+
+@media (max-width:768px){
+	.jumbotron #details{
+		margin-top: 20px;
+	}
+
+	.post .post-title{
+		margin-top: -30px;
+		border:none;
+		text-align: center;
+	}
+
+	.post .profile-picture{
+		text-align: center;
+		margin-top: -25px;
+	}
+
+	.post .profile-picture img{
+		width: 20%;
+	}
+
+	.pagination >li >a {
+		font-size: 13px;
+		padding: 10px 12px;
+	}
+
+	footer{
+		font-size: 10px;
+		letter-spacing: 0px;
+	}
+
+	.navbar-inverse .navbar-nav > li > a{
+		text-align: center;
+	}
+
+	.navbar-inverse .navbar-nav .open .dropdown-menu >li >a{
+		text-align: center;
+	}
+
+	.post > a > img{
+	width: 100%;
+	height:180px;
+}
+
+.author img, .comment img{
+	width: 30%;
+}
+}
