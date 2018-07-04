@@ -1,7 +1,46 @@
 <?php require_once('inc/top.php'); ?>
 <body>
-<?php require_once('inc/header.php'); ?>
+<?php require_once('inc/header.php');
+	if (isset($_GET['page'])) {
+		$page_id = $_GET['page'];
+	}
+	else {
+		$page_id = 1;
+	}
 
+	if(isset($_GET['cat'])){
+		$cat_id = $_GET['cat'];
+		$cat_query = "SELECT * FROM categories WHERE id = $cat_id";
+		$cat_run = mysqli_query($conn,$cat_query);
+		$cat_row = mysqli_fetch_array($cat_run);
+		$cat_name = $cat_row['category'];
+	}
+
+	$number_of_posts = 3;
+if(isset($_POST['search'])){
+	$search = $_POST['search-title'];
+	$all_post_query = "SELECT * FROM posts WHERE status = 'publish'";
+	$all_post_query .="and tags LIKE '%$search%'";
+	$all_post_run = mysqli_query($conn, $all_post_query);
+	$all_posts = mysqli_num_rows($all_post_run);
+	$total_pages = ceil($all_posts / $number_of_posts);
+	$post_start_from = ($page_id - 1)*$number_of_posts;
+
+}
+
+else {
+	$all_post_query = "SELECT * FROM posts WHERE status = 'publish'";
+	if(isset($cat_name)){
+		$all_post_query .= " and categories = '$cat_name'";
+	}
+	$all_post_run = mysqli_query($conn, $all_post_query);
+	$all_posts = mysqli_num_rows($all_post_run);
+	$total_pages = ceil($all_posts / $number_of_posts);
+	$post_start_from = ($page_id - 1)*$number_of_posts;
+
+}
+
+?>
 <div class="jumbotron">
 	<div class="container-fluid">
 		<div  class="animated fadeInLeft" id="details">
@@ -15,12 +54,23 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
-				<?php 
-					  $query = "SELECT * FROM posts where status = 'publish' order by id desc";
-		              $run = mysqli_query($conn,$query);
+				<?php if(isset($_POST['search-title'])){
+					$search = $_POST['search-title'];
+					$query = "SELECT * FROM posts where status = 'publish'";
+					$query .=" and tags LIKE '%$search%'";
+					$query .= " ORDER BY id DESC LIMIT $post_start_from, $number_of_posts";
+			}
+
+					else{ $query = "SELECT * FROM posts where status = 'publish'";
+				 if(isset($cat_name)){
+					 $query .=" and categories = '$cat_name'";
+				 }
+					 $query .= " ORDER BY id DESC LIMIT $post_start_from, $number_of_posts";
+							 }
+					 $run = mysqli_query($conn,$query);
 		              if(mysqli_num_rows($run)>0){
 		                while($row = mysqli_fetch_array($run)){
-		                  
+
 		                  $id = $row['id'];
 		                  $date = getdate($row['date']);
 		                  $day = $date['mday'];
@@ -35,7 +85,7 @@
 		                  $post_data = $row['post_data'];
 		                  $views = $row['views'];
 		                  $status = $row['status'];
-		       								 ?>      
+		       								 ?>
 
 		       	<div class="post">
 					<div class="row">
@@ -80,21 +130,10 @@
 	<nav aria-label="Page navigation">
 		<div id="pagination">
   			<ul class="pagination">
-    			<li>	
-    				<a href="#" aria-label="Previous">
-        				<span aria-hidden="true">&laquo;</span>
-      				</a>
-    			</li>
-    			<li class="active"><a href="#">1</a></li>
-    			<li><a href="#">2</a></li>
-    			<li><a href="#">3</a></li>
-    			<li><a href="#">4</a></li>
-    			<li><a href="#">5</a></li>
-    			<li>
-      			<a href="#" aria-label="Next">
-        			<span aria-hidden="true">&raquo;</span>
-      			</a>
-    			</li>
+  				<?php
+  				for($i=1; $i<=$total_pages;$i++){
+  					echo "<li class='".($page_id == $i ? 'active':' ')."'><a href='index.php?page=".$i."&".(isset($cat_name)?"cat=$cat_id":"")."'>$i</a></li>";
+  				} ?>
   			</ul>
   		</div>
 </nav>
@@ -102,7 +141,7 @@
 <!-- Pagination Ends -->
 
 </div>
-	
+
 	<div class="col-md-4">
 		<?php require_once('inc/sidebar.php'); ?>
 		</div>
