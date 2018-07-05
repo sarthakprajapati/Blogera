@@ -1,4 +1,33 @@
+<?php require_once '../inc/db.php';
+ob_start();
+session_start();
+if(isset($_POST['submit'])){
+  $username = mysqli_real_escape_string($conn,strtolower($_POST['username']));
+  $password = mysqli_real_escape_string($conn,$_POST['password']);
+  $check_username_query = "SELECT * FROM users where username = '$username'";
+  $check_username_run = mysqli_query($conn,$check_username_query);
 
+  if(mysqli_num_rows($check_username_run)){
+    $row = mysqli_fetch_array($check_username_run);
+    $db_username = $row['username'];
+    $db_password = $row['password'];
+    $db_role = $row['role'];
+    $db_salt = $row['salt'];
+
+    $hash = crypt($row['salt'],$password);
+    echo "$password $db_password ";
+    if($username == $db_username and $hash == $db_password){
+      header('Location: index.php');
+    }
+    else {
+      $error = "Username Or Password is incorrect";
+    }
+  }
+  else{
+    $error = "Username Or Password is incorrect";
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,20 +61,19 @@
   <body>
 
     <div class="container animated shake">
-
-      <form class="form-signin">
+      <form class="form-signin" method="post">
         <h3 class="form-signin-heading">Hello, Admin Sign In</h3>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
         <br>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+        <input type="submit" name="submit" value="Sign In" class="btn btn-lg btn-success btn-block">
       </form>
 
     </div> <!-- /container -->
