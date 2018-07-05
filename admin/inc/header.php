@@ -17,7 +17,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="fa fa-plus-square"></span> Add Post</a></li>
-            <li><a href="contact.php"><span class="fa fa-user-plus"></span> Add User</a></li>
+            <li><a href="add-user.php"><span class="fa fa-user-plus"></span> Add User</a></li>
             <li><a href="#"><span class="fa fa-user"></span> Profile</a></li>
             <li><a href="contact.php"><span class="fa fa-power-off"></span> Log Out</a></li>
           </ul>
