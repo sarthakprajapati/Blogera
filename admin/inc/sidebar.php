@@ -1,5 +1,5 @@
 <div class="list-group">
-    <a href="#" class="list-group-item active">
+    <a href="index.php" class="list-group-item active">
         <span class="fa fa-tachometer-alt"></span> Dashboard
     </a>
     <a href="#" class="list-group-item">
