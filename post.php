@@ -5,7 +5,10 @@
 
 <?php
 if(isset($_GET['post_id'])){
-	$post_id = $_GET['post_id'];
+$post_id = $_GET['post_id'];
+	// views functionality
+	$view_query = "UPDATE `posts` SET `views` = views+1 WHERE `posts`.`id` = $post_id;";
+	mysqli_query($conn,$view_query);
 	$query = "select * from posts where status = 'publish' and id='$post_id'";
 	$run = mysqli_query($conn,$query);
 	if(mysqli_num_rows($run)>0){
@@ -136,6 +139,10 @@ if(isset($_GET['post_id'])){
 						$cs_query = "INSERT INTO `comments` (`id`, `date`, `name`, `username`, `post_id`, `email`, `website`, `image`, `comment`, `status`) VALUES (NULL, '$cs_date', '$cs_name', '$c_username', '$post_id', '$cs_email', '$cs_website', '$author_image', '$cs_comment', 'pending');";
 						if(mysqli_query($conn,$cs_query)){
 							$msg = "Comment submitted and waiting for approval";
+							$cs_name = "";
+							$cs_email = "";
+							$cs_website = "";
+							$cs_comment = "";
 						}
 						else {
 							$msg = "Comment has not been submitted";
@@ -150,22 +157,22 @@ if(isset($_GET['post_id'])){
             <form action="" method="post">
               <div class="form-group">
                 <label for="name">Full Name*:</label>
-                <input type="text" id="name" name="name" placeholder="Full Name" class="form-control">
+                <input type="text" id="name" name="name" value="<?php if(isset($_POST['name'])){echo $cs_name;} ?>" placeholder="Full Name" class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="email">Email*:</label>
-                <input type="text" id="email" name="email" placeholder="Email" class="form-control">
+                <input type="text" id="email" name="email" value="<?php if(isset($_POST['email'])){echo $cs_email;} ?>" placeholder="Email" class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="website">Website:</label>
-                <input type="text" id="website" name="website" placeholder="Website" class="form-control">
+                <input type="text" id="website" name="website" value="<?php if(isset($_POST['website'])){echo $cs_website;} ?>" placeholder="Website" class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="message">Comment*:</label>
-                <textarea id="message" cols="30" rows="10" name="comment" class="form-control" placeholder="Your Comment Should Be Here!"></textarea>
+                <textarea id="message" cols="30" rows="10" name="comment" class="form-control" value="<?php if(isset($_POST['comment'])){echo $cs_comment;} ?>" placeholder="Your Comment Should Be Here!"></textarea>
               </div>
               <input type="submit" name="submit" value="Submit Comment" class="btn btn-primary">
 
