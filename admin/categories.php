@@ -3,7 +3,7 @@
   header('Location: sign.php');
 }
 else if (isset($_SESSION['username'])&& $_SESSION['role']=='author') {
-  header('Location: logout.php');
+  header('Location: index.php');
 }
 
 if(isset($_GET['edit'])){
