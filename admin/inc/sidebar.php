@@ -8,7 +8,7 @@
     <a href="categories.php" class="list-group-item">
         <span class="fa fa-folder"></span> Categories <span class="badge">50</span>
     </a>
-    <a href="#" class="list-group-item">
+    <a href="comments.php" class="list-group-item">
         <span class="fa fa-comment"></span> Comments <span class="badge">8</span>
     </a>
     <a href="users.php" class="list-group-item">
