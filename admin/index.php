@@ -1,5 +1,12 @@
-
-<?php require_once("inc/top.php"); ?>
+<?php require_once '../inc/db.php'; ?>
+<?php require_once("inc/top.php");
+?>
+<?php
+session_start();
+ if(!isset($_SESSION['username'])){
+  header('Location: sign.php');
+}
+?>
   <body>
 <?php require_once("inc/header.php"); ?>
 
@@ -9,7 +16,6 @@
     <div class="col-md-3">
       <?php require_once("inc/sidebar.php"); ?>
     </div>
-
 
     <div class="col-md-9">
       <h1><i class="fa fa-tachometer-alt"></i> Dashboard <small>Statistics Preview</small></h1><hr>
@@ -32,7 +38,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <a href="#">
                 <div class="panel-footer">
@@ -58,7 +64,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <a href="#">
                 <div class="panel-footer">
@@ -84,7 +90,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <a href="#">
                 <div class="panel-footer">
@@ -110,7 +116,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
             <a href="#">
                 <div class="panel-footer">
@@ -180,7 +186,7 @@
           </tbody>
       </table>
       <button class="btn btn-primary">View All Users</button>
-      
+
       <hr>
            <h1>New Posts</h1>
       <hr>

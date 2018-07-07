@@ -1,6 +1,6 @@
 <?php require_once '../inc/db.php';
-ob_start();
 session_start();
+ob_start();
 if(isset($_POST['submit'])){
   $username = mysqli_real_escape_string($conn,strtolower($_POST['username']));
   $password = mysqli_real_escape_string($conn,$_POST['password']);
@@ -18,6 +18,8 @@ if(isset($_POST['submit'])){
     echo "$password $db_password ";
     if($username == $db_username and $hash == $db_password){
       header('Location: index.php');
+      $_SESSION['username'] = $db_username;
+      $_SESSION['role'] = $db_role;
     }
     else {
       $error = "Username Or Password is incorrect";

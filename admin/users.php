@@ -1,17 +1,27 @@
 <?php require_once '../inc/db.php'; ?>
+<?php session_start();
+ if(!isset($_SESSION['username'])){
+ header('Location: sign.php');
+}
+else if (isset($_SESSION['username'])&& $_SESSION['role']=='author') {
+  header('Location: index.php');
+}
+?>
 <?php require_once("inc/top.php"); ?>
 <body>
 <?php require_once("inc/header.php"); ?>
 <?php if(isset($_GET['del'])){
     $del_id = $_GET['del'];
     $del_query = "DELETE FROM `users` WHERE `id` = $del_id";
-    if(mysqli_query($conn,$del_query)){
-      $msg = "User has been deleted";
+    if(isset($_SESSION['username']) && $_SESSION['role'] =='admin'){
+      if(mysqli_query($conn,$del_query)){
+        $msg = "User has been deleted";
+      }
+      else {
+        $error = "User has not been deleted";
+        }
+      }
     }
-    else {
-      $error = "User has not been deleted";
-    }
-}
 if(isset($_POST['checkboxes'])){
   foreach ($_POST['checkboxes'] as $user_id) {
     $bulk_option = $_POST['bulk-options'];
@@ -122,7 +132,7 @@ if(isset($_POST['checkboxes'])){
                 <td>*********</td>
                 <td><?php echo ucfirst($role); ?></td>
                 <td>11</td>
-                <td><a href="add-user.php?edit=<?php echo $id; ?>"><i class="fa fa-pencil-alt"></i></a></td>
+                <td><a href="edit-user.php?edit=<?php echo $id; ?>"><i class="fa fa-pencil-alt"></i></a></td>
                 <td><a href="users.php?del=<?php echo $id; ?>"><i class="fa fa-times"></i></a></td>
               </tr>
             <?php } ?>

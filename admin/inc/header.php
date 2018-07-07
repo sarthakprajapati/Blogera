@@ -1,3 +1,7 @@
+<?php
+$top_username = $_SESSION['username'];
+$top_role = ucfirst($_SESSION['role']);
+?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
 
@@ -16,10 +20,11 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="profile.php"></span> <?php echo "Hello, $top_username ($top_role)"; ?></a></li>
             <li><a href="#"><span class="fa fa-plus-square"></span> Add Post</a></li>
             <li><a href="add-user.php"><span class="fa fa-user-plus"></span> Add User</a></li>
-            <li><a href="#"><span class="fa fa-user"></span> Profile</a></li>
-            <li><a href="contact.php"><span class="fa fa-power-off"></span> Log Out</a></li>
+            <li><a href="profile.php"><span class="fa fa-user"></span> Profile</a></li>
+            <li><a href="logout.php"><span class="fa fa-power-off"></span> Log Out</a></li>
           </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

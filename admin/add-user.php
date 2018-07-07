@@ -1,4 +1,12 @@
 <?php require_once '../inc/db.php'; ?>
+<?php session_start();
+ if(!isset($_SESSION['username'])){
+  header('Location: logout.php');
+}
+else if (isset($_SESSION['username'])&& $_SESSION['role']=='author') {
+  header('Location: logout.php');
+}
+?>
 <?php require_once("inc/top.php"); ?>
   <body>
 <?php require_once("inc/header.php"); ?>
