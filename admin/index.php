@@ -8,7 +8,23 @@ session_start();
 }
 ?>
   <body>
-<?php require_once("inc/header.php"); ?>
+<?php require_once("inc/header.php");
+$query_comment = "SELECT * FROM comments where status = 'pending'";
+$query_post = "SELECT * FROM posts";
+$query_user = "SELECT * FROM users";
+$query_category = "SELECT * FROM categories";
+
+
+$query_comment_run = mysqli_query($conn,$query_comment);
+$query_post_run = mysqli_query($conn,$query_post);
+$query_user_run = mysqli_query($conn,$query_user);
+$query_category_run = mysqli_query($conn,$query_category);
+
+$count_comment = mysqli_num_rows($query_comment_run);
+$count_post = mysqli_num_rows($query_post_run);
+$count_user = mysqli_num_rows($query_user_run);
+$count_category = mysqli_num_rows($query_category_run);
+?>
 
 
 <div class="container-fluid">
@@ -16,6 +32,7 @@ session_start();
     <div class="col-md-3">
       <?php require_once("inc/sidebar.php"); ?>
     </div>
+
 
     <div class="col-md-9">
       <h1><i class="fa fa-tachometer-alt"></i> Dashboard <small>Statistics Preview</small></h1><hr>
@@ -32,7 +49,7 @@ session_start();
                   <i class="fa fa-comments fa-5x"></i>
                 </div>
                 <div class="col-xs-9">
-                  <div class="text-right huge">11
+                  <div class="text-right huge"><?php echo $count_comment; ?>
                   </div>
                   <div class="text-right">New Comments
                   </div>
@@ -40,7 +57,7 @@ session_start();
               </div>
 
             </div>
-            <a href="#">
+            <a href="comments.php">
                 <div class="panel-footer">
                   <span class="pull-left">View All Comments</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle"></i></span>
@@ -58,7 +75,7 @@ session_start();
                   <i class="fa fa-file-alt fa-5x"></i>
                 </div>
                 <div class="col-xs-9">
-                  <div class="text-right huge">20
+                  <div class="text-right huge"><?php echo $count_post; ?>
                   </div>
                   <div class="text-right">New Posts
                   </div>
@@ -66,7 +83,7 @@ session_start();
               </div>
 
             </div>
-            <a href="#">
+            <a href="posts.php">
                 <div class="panel-footer">
                   <span class="pull-left">View All Posts</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle"></i></span>
@@ -84,7 +101,7 @@ session_start();
                   <i class="fa fa-users fa-5x"></i>
                 </div>
                 <div class="col-xs-9">
-                  <div class="text-right huge">35
+                  <div class="text-right huge"><?php echo $count_user; ?>
                   </div>
                   <div class="text-right">New Users
                   </div>
@@ -92,7 +109,7 @@ session_start();
               </div>
 
             </div>
-            <a href="#">
+            <a href="users.php">
                 <div class="panel-footer">
                   <span class="pull-left">View All Users</span>
                   <span class="pull-right"><i class="fa fa-arrow-circlec"></i></span>
@@ -110,7 +127,7 @@ session_start();
                   <i class="fa fa-folder fa-5x"></i>
                 </div>
                 <div class="col-xs-9">
-                  <div class="text-right huge">18
+                  <div class="text-right huge"><?php echo $count_category; ?>
                   </div>
                   <div class="text-right">Categories
                   </div>
@@ -118,7 +135,7 @@ session_start();
               </div>
 
             </div>
-            <a href="#">
+            <a href="categories.php">
                 <div class="panel-footer">
                   <span class="pull-left">View All Categories</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle"></i></span>
