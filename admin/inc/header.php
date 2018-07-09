@@ -21,7 +21,7 @@ $top_role = ucfirst($_SESSION['role']);
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="profile.php"></span> <?php echo "Hello, $top_username ($top_role)"; ?></a></li>
-            <li><a href="#"><span class="fa fa-plus-square"></span> Add Post</a></li>
+            <li><a href="add-post.php"><span class="fa fa-plus-square"></span> Add Post</a></li>
             <li><a href="add-user.php"><span class="fa fa-user-plus"></span> Add User</a></li>
             <li><a href="profile.php"><span class="fa fa-user"></span> Profile</a></li>
             <li><a href="logout.php"><span class="fa fa-power-off"></span> Log Out</a></li>

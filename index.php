@@ -107,9 +107,9 @@ else {
 
 					<a href="post.php?post_id=<?php echo($id); ?>"><img src="img/<?php echo $image; ?>" alt=""></a>
 
-					<p class="desc">
+					<div class="desc">
 						<?php echo substr($post_data, 0,420)."..."; ?>
-					</p>
+					</div>
 
 					<a href="post.php?post_id=<?php echo($id); ?>" class="btn btn-primary"> Read More </a>
 

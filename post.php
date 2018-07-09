@@ -25,6 +25,7 @@ $post_id = $_GET['post_id'];
 			$categories = $row['categories'];
 			$post_data = $row['post_data'];
 			$tags = $row['tags'];
+			$username = $row['username'];
 	}
 	else {
 	header('location: index.php');
@@ -62,9 +63,9 @@ $post_id = $_GET['post_id'];
           </div>
 
           <a href="img/<?php echo $image; ?>"><img src="img/<?php echo $image; ?>" alt=""></a>
-          <p class="desc">
+          <div class="desc">
             <?php echo $post_data; ?>
-					</p>
+					</div>
            <div class="bottom">
             <span class="first"><i class="fa fa-folder"></i> <a href="">Category</a></span> |
             <span class="sec"><i class="fa fa-comment"></i> <a href="">Comment</a></span>
@@ -94,8 +95,18 @@ $post_id = $_GET['post_id'];
             </div>
             <div class="col-md-9">
               <h2><?php echo $author; ?></h2>
-              <p class="author-desc">I am Sarthak Prajapati. I live in one of the most beautiful cities of North India. I have been using and doing this computer stuff from around 5 years if memory serves correctly. I was born in Ghaziabad. I have spent my entire childhood in Bareilly. As I fall into December, it makes me Sagittarius, mostly calm.</p>
+							<?php $bio_query = "SELECT * FROM users where username = '$username'";
+							$bio_query_run = mysqli_query($conn,$bio_query);
+							if(mysqli_num_rows($bio_query_run)>0){
+								$det = mysqli_fetch_array($bio_query_run);
+								$bio_data = $det['details'];
+							?>
+              <p class="author-desc"><?php echo $bio_data; ?></p>
+						<?php } else {
+							echo "User details are not available";
+						} ?>
             </div>
+
           </div>
         </div>
 

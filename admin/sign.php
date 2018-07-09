@@ -13,6 +13,7 @@ if(isset($_POST['submit'])){
     $db_password = $row['password'];
     $db_role = $row['role'];
     $db_salt = $row['salt'];
+    $db_author_image = $row['image'];
 
     $hash = crypt($row['salt'],$password);
     echo "$password $db_password ";
@@ -20,6 +21,7 @@ if(isset($_POST['submit'])){
       header('Location: index.php');
       $_SESSION['username'] = $db_username;
       $_SESSION['role'] = $db_role;
+      $_SESSION['author_image'] = $db_author_image;
     }
     else {
       $error = "Username Or Password is incorrect";
