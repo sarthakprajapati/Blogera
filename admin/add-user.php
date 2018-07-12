@@ -127,5 +127,6 @@ else if (isset($_SESSION['username'])&& $_SESSION['role']=='author') {
     </div>
   </div>
 </div>
+<?php require_once('inc/footer.php'); ?>
   </body>
 </html>

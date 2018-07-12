@@ -81,7 +81,6 @@ if(isset($_POST['submit'])){
       </form>
 
     </div> <!-- /container -->
-
-
+<?php require_once('inc/footer.php'); ?>
   </body>
 </html>

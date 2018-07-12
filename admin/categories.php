@@ -187,5 +187,6 @@ if(isset($_POST['update'])){
     </div>
   </div>
 </div>
+<?php require_once('inc/footer.php'); ?>
   </body>
 </html>

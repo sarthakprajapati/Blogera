@@ -145,12 +145,11 @@ $count_category = mysqli_num_rows($query_category_run);
           </div>
         </div>
       </div>
+      <?php $user_query = "SELECT * FROM users";
+      $user_query_run = mysqli_query($con,$user_query);
+      ?>
       <h1>New Users</h1>
       <hr>
-      <?php $user_query = "SELECT * FROM users";
-      $user_query_run = mysqli_query($conn,$user_query);
-      if(mysqli_num_rows($user_query_run)>0){ 
-      ?>
       <table class="table table-striped">
          <thead>
               <tr>
@@ -161,18 +160,19 @@ $count_category = mysqli_num_rows($query_category_run);
                   <th>Role</th>
               </tr>
           </thead>
-          
           <tbody>
-            <?php while($row = mysqli_fetch_array($user_query_run)){
-          $id = $row['id'];
-          $name = $row['first_name']." ".$row['last_name'];
-          $username = $row['username'];
-          $role = $row['role'];
-          $date = getdate($row['date']);
-          $day = $date['mday'];
-          $month = $date['month'];
-          $year = $date['year'];
-           ?>
+            <?php
+            if(mysqli_num_rows($user_query_run)>0){
+              while($row = mysqli_fetch_array($user_query_run)){
+                $id = $row['id'];
+                $date = getdate($row['date']);
+                $day = $date['mday'];
+                $month = $date['month'];
+                $year = $date['year'];
+                $name = $row['first_name']." ".$row['last_name'];
+                $username = $row['username'];
+                $role = $row['role'];
+            ?>
               <tr>
                   <td><?php echo $id; ?></td>
                   <td><?php echo "$day $month $year"; ?></td>
@@ -180,21 +180,16 @@ $count_category = mysqli_num_rows($query_category_run);
                   <td><?php echo $username; ?></td>
                   <td><?php echo $role; ?></td>
               </tr>
-              <?php  } ?>
+            <?php    }
+                }
+             ?>
           </tbody>
-          
       </table>
-      <?php    
-      } ?>
-      <a href="users.php" class="btn btn-primary">View All Users</a>
+      <button class="btn btn-primary">View All Users</button>
 
       <hr>
            <h1>New Posts</h1>
       <hr>
-            <?php $post_query = "SELECT * FROM posts";
-      $post_query_run = mysqli_query($conn,$post_query);
-      if(mysqli_num_rows($post_query_run)>0){ 
-      ?>
       <table class="table table-striped">
          <thead>
               <tr>
@@ -206,33 +201,53 @@ $count_category = mysqli_num_rows($query_category_run);
               </tr>
           </thead>
           <tbody>
-            <?php while($row = mysqli_fetch_array($post_query_run)){
-          $id = $row['id'];
-          $date = getdate($row['date']);
-          $day = $date['mday'];
-          $month = $date['month'];
-          $year = $date['year'];
-          $title = $row['title'];
-          $category = $row['categories'];
-          $views = $row['views'];
-
-           ?>
               <tr>
-                  <td><?php echo "$id"; ?></td>
-                  <td><?php echo "$day $month $year"; ?></td>
-                  <td><?php echo "$title"; ?></td>
-                  <td><?php echo "$category"; ?></td>
-                  <td><i class="fa fa-eye"></i> <?php echo $views; ?></td>
+                  <td>1</td>
+                  <td>20 June 2018</td>
+                  <td>Instagram plans to launch Snapchat Discover-style video hub</td>
+                  <td>Article</td>
+                  <td><i class="fa fa-eye"></i> 12</td>
               </tr>
-              <?php  } ?>
+              <tr>
+                  <td>1</td>
+                  <td>20 June 2018</td>
+                  <td>Instagram plans to launch Snapchat Discover-style video hub</td>
+                  <td>Article</td>
+                  <td><i class="fa fa-eye"></i> 12</td>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>20 June 2018</td>
+                  <td>Instagram plans to launch Snapchat Discover-style video hub</td>
+                  <td>Article</td>
+                  <td><i class="fa fa-eye"></i> 12</td>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>20 June 2018</td>
+                  <td>Instagram plans to launch Snapchat Discover-style video hub</td>
+                  <td>Article</td>
+                  <td><i class="fa fa-eye"></i> 12</td>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>20 June 2018</td>
+                  <td>Instagram plans to launch Snapchat Discover-style video hub</td>
+                  <td>Article</td>
+                  <td><i class="fa fa-eye"></i> 12</td>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>20 June 2018</td>
+                  <td>Instagram plans to launch Snapchat Discover-style video hub</td>
+                  <td>Article</td>
+                  <td><i class="fa fa-eye"></i> 12</td>
+              </tr>
           </tbody>
       </table>
-      <?php    
-      } ?>
-      <a href="posts.php" class="btn btn-primary">View All Posts</a>
+      <button class="btn btn-primary">View All Posts</button>
     </div>
   </div>
 </div>
-<?php require_once('inc/footer.php'); ?>
   </body>
 </html>

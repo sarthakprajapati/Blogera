@@ -1,6 +1,7 @@
 <?php
 $top_username = $_SESSION['username'];
 $top_role = ucfirst($_SESSION['role']);
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -21,11 +22,11 @@ $top_role = ucfirst($_SESSION['role']);
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="profile.php"></span> <?php echo "Hello, $top_username ($top_role)"; ?></a></li>
-            <li><a href="add-post.php"><span class="fa fa-plus-square"></span> Add Post</a></li>
+            <li class="<?php if($currentPage =='add-post.php' ){echo 'active';}?>"><a href="add-post.php"><span class="fa fa-plus-square"></span> Add Post</a></li>
             <?php if($top_role == 'Admin'){ ?>
-            <li><a href="add-user.php"><span class="fa fa-user-plus"></span> Add User</a></li>
+            <li class="<?php if($currentPage =='add-user.php'){echo 'active';}?>"><a href="add-user.php"><span class="fa fa-user-plus"></span> Add User</a></li>
           <?php } ?>
-            <li><a href="profile.php"><span class="fa fa-user"></span> Profile</a></li>
+            <li class="<?php if($currentPage =='profile.php'){echo 'active';}?>"><a href="profile.php"><span class="fa fa-user"></span> Profile</a></li>
             <li><a href="logout.php"><span class="fa fa-power-off"></span> Log Out</a></li>
           </ul>
       </div><!-- /.navbar-collapse -->

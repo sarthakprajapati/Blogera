@@ -123,5 +123,6 @@ $session_username = $_SESSION['username'];
     </div>
   </div>
 </div>
+<?php require_once('inc/footer.php'); ?>
   </body>
 </html>

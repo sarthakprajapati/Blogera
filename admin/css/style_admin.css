@@ -56,3 +56,18 @@ body#profile img#profile-image{
 -moz-box-shadow: 0px 0px 37px 1px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 37px 1px rgba(0,0,0,0.75);
 }
+
+footer{
+	min-height: 100%;
+	padding: 10px 3px; 
+	background-color: black;
+	color:white;
+	font-weight: bold;
+	letter-spacing: .8px;
+	margin-top: 50px;
+	clear: both;
+    position: relative;
+    bottom: 0;
+    height: 3em;
+
+}

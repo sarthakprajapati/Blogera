@@ -127,5 +127,6 @@ $session_author_image = $_SESSION['author_image'];
       </div>
   </div>
 </div>
+<?php require_once('inc/footer.php'); ?>
   </body>
 </html>

@@ -94,5 +94,6 @@ $details = $row['details'];
       </div>
     </div>
 </div>
+<?php require_once('inc/footer.php'); ?>
   </body>
 </html>
