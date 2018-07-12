@@ -44,7 +44,7 @@ else if (isset($_SESSION['username'])&& $_SESSION['role']=='author') {
         $salt = mysqli_fetch_array($salt_run);
         $password = crypt('$2a$07$usesomesillystringforsalt$',$password);
 
-        if(empty($fname) or empty($lname) or empty($uname) or empty($password) or empty($email) or empty($image)){
+        if(empty($fname) or empty($lname) or empty($uname) or empty($password) or empty($email)){
           $error = "All (*) fields are required";
         }
         elseif($uname != $uname_trim) {
@@ -54,8 +54,10 @@ else if (isset($_SESSION['username'])&& $_SESSION['role']=='author') {
           $error = "Username or Email already in use!";
         }
         else{
-
-          $insert_query = "INSERT INTO `users` (`id`, `date`, `first_name`, `last_name`, `username`, `email`, `image`, `password`, `role`, `details`) VALUES (NULL, 'getdate()[0];', '$fname', '$lname', '$uname', '$email', '$image', '$password', '$role','detail');";
+            
+          $time = time();
+          $insert_query = "INSERT INTO `users` (`id`, `date`, `first_name`, `last_name`, `username`, `email`, `image`, `password`, `role`, `details`) VALUES (NULL, '$time', '$fname', '$lname', '$uname', '$email', '$image', '$password', '$role','detail');";
+          echo "<h1>hello</h1>";
           if(mysqli_query($conn,$insert_query)){
               $msg = "User has been added";
               move_uploaded_file($image_tmp,"img/$image");

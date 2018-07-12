@@ -141,6 +141,7 @@ else {
 <!-- Pagination Ends -->
 
 </div>
+</div>
 
 	<div class="col-md-4">
 		<?php require_once('inc/sidebar.php'); ?>

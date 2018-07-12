@@ -1,12 +1,16 @@
-
 <?php
-session_start();
+error_reporting(0);
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }
 require_once("inc/top.php");
 require_once("inc/header.php");
  if(!isset($_SESSION['username'])){
   header('Location: sign.php');
 }
 else {
+    
  require_once '../inc/db.php';
 }
 ?>
@@ -94,6 +98,6 @@ $details = $row['details'];
       </div>
     </div>
 </div>
-<?php require_once('inc/footer.php'); ?>
   </body>
+  <?php require_once('inc/footer.php'); ?>
 </html>

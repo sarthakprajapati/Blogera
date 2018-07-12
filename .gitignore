@@ -1,2 +1,6 @@
 
 admin/img/IMG_20180406_234209_962.jpg
+*.png
+*.jpg
+*.png
+inc/db.php
