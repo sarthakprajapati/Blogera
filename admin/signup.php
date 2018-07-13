@@ -1,40 +1,44 @@
 <?php require_once '../inc/db.php';
 session_start();
 ob_start();
+
 if(isset($_POST['submit'])){
-  $username = mysqli_real_escape_string($conn,strtolower($_POST['username']));
+  $email = mysqli_real_escape_string($conn,$_POST['email']);
+  $username = mysqli_real_escape_string($conn,$_POST['username']);
   $password = mysqli_real_escape_string($conn,$_POST['password']);
-  $check_username_query = "SELECT * FROM users where username = '$username'";
-  $check_username_run = mysqli_query($conn,$check_username_query);
+  $repeatpass = mysqli_real_escape_string($conn,$_POST['repeat']);
 
-  if(mysqli_num_rows($check_username_run)){
-    $row = mysqli_fetch_array($check_username_run);
-    $db_username = $row['username'];
-    $db_password = $row['password'];
-    $db_role = $row['role'];
-    $db_salt = $row['salt'];
-    $db_author_image = $row['image'];
-    $d = getdate($row['date']);
-    $date = $d['mday'];
-    $db_id = $row['id'];
-
-    $hash = crypt($row['salt'],$password);
-    echo "$password $db_password ";
-    if($username == $db_username and $hash == $db_password){
-      header('Location: index.php');
-      $_SESSION['username'] = $db_username;
-      $_SESSION['role'] = $db_role;
-      $_SESSION['author_image'] = $db_author_image;
-
-    }
-    else {
-      $error = "Username Or Password is incorrect";
-    }
+  if(empty($email) or empty($username) or empty($password) or empty($repeatpass)){
+    $error_msg = "All fields are required";
+  }
+  else if ($password!=$repeatpass){
+    $error_msg = "Password is not same";
   }
   else{
-    $error = "Username Or Password is incorrect";
+    $query = "SELECT username,email from users WHERE username = '$username' OR email = '$email'";
+    $query_run = mysqli_query($conn,$query);
+    if(mysqli_num_rows($query_run)>0){
+      $error_msg = "Username or Email Already in use!";
+    }
+    else{
+      function cryptit($p,$c){
+        $queryforhash = "SELECT salt from users LIMIT 1";
+        $queryforhash_run = mysqli_query($c,$queryforhash);
+        $getsalt = mysqli_fetch_array($queryforhash_run);
+        return crypt($getsalt['salt'],$p); 
+      }
+
+      $time = time();
+      $hash = cryptit($password,$conn);
+      $insert_query = "INSERT INTO `users` ( `username`,`date`, `email`, `password`,`role`) VALUES ('$username','$time','$email','$hash','author');";
+      if(mysqli_query($conn,$insert_query)){
+        header("refresh:1; url=sign.php");
+      }
+      $msg = "User has been registered successfully";
+    }
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,21 +86,37 @@ if(isset($_POST['submit'])){
 <div id="particle"></div>
     <div class="container animated shake">
       <form class="form-signin" method="post">
-        <h3 class="form-signin-heading">Hello, Admin Sign In</h3>
+        <h3 class="form-signin-heading">Sign Up</h3>
+        <div class="form-group">
         <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username" required autofocus>
+      </div>
         <br>
+        <div class="form-group">
+        <label for="email" class="sr-only">Email</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required autofocus>
+      </div>
+      <br>
+        <div class="form-group">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <input type="submit" name="submit" value="Sign In" class="btn btn-lg btn-success btn-block">
-        <a href="signup.php" class="btn btn-lg btn-warning btn-block">Create An Account</a>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Enter Password" required>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPasswordrepeat" name="repeat" class="form-control" placeholder="Repeat Password" required>
+      </div>
+        <input type="submit" name="submit" value="Sign Up" class="btn btn-lg btn-success btn-block">
       </form>
 </div>
+
+    <?php if(isset($msg)){
+            echo "<div class='alert alert-success'>
+                  <strong><center>$msg<center></strong></div>";
+          }
+          else if(isset($error_msg)) {echo "<div class='alert alert-danger'>
+                <strong><center>$error_msg<center></strong></div>";}
+          ?>
     </div> <!-- /container -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
 <script type="text/javascript">
